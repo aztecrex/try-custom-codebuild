@@ -97,44 +97,44 @@ Resources:
 
 
 
-    # Pipeline:
-    #     Type: AWS::CodePipeline::Pipeline
-    #     Properties:
-    #         ArtifactStore:
-    #             Location: !Ref ArtifactStore
-    #             Type: S3
-    #         RoleArn: !GetAtt PipelineRole.Arn
-    #         RestartExecutionOnUpdate: false
-    #         Stages:
-    #           - Name: Source
-    #             Actions:
-    #               - Name: Source
-    #                 ActionTypeId:
-    #                     Category: Source
-    #                     Owner: AWS
-    #                     Version: 1
-    #                     Provider: S3
-    #                 OutputArtifacts:
-    #                     - Name: Operations-Frontend-Source
-    #                 Configuration:
-    #                     S3Bucket: !Ref SourceStore
-    #                     S3ObjectKey: frontend-master.zip
-    #                 RunOrder: 1
-    #           - Name: Build
-    #             Actions:
-    #               - Name: Build
-    #                 ActionTypeId:
-    #                     Category: Build
-    #                     Owner: AWS
-    #                     Version: 1
-    #                     Provider: CodeBuild
-    #                 Configuration:
-    #                     ProjectName: !Ref Builder
-    #                 InputArtifacts:
-    #                   - Name: Operations-Frontend-Source
-    #                 OutputArtifacts:
-    #                   - Name: Operations-Frontend-Deployable
-                    # RunOrder: 2
+    Pipeline:
+        Type: AWS::CodePipeline::Pipeline
+        Properties:
+            ArtifactStore:
+                Location: !Ref ArtifactStore
+                Type: S3
+            RoleArn: !GetAtt PipelineRole.Arn
+            RestartExecutionOnUpdate: false
+            Stages:
+              - Name: Source
+                Actions:
+                  - Name: Source
+                    ActionTypeId:
+                        Category: Source
+                        Owner: AWS
+                        Version: 1
+                        Provider: S3
+                    OutputArtifacts:
+                        - Name: SourceArtifact
+                    Configuration:
+                        S3Bucket: !Ref SourceStore
+                        S3ObjectKey: master.zip
+                    RunOrder: 1
+              - Name: Build
+                Actions:
+                  - Name: Build
+                    ActionTypeId:
+                        Category: Build
+                        Owner: AWS
+                        Version: 1
+                        Provider: CodeBuild
+                    Configuration:
+                        ProjectName: !Ref Builder
+                    InputArtifacts:
+                      - Name: SourceArtifact
+                    OutputArtifacts:
+                      - Name: BuildArtifact
+                    RunOrder: 2
 
     Builder:
         Type: AWS::CodeBuild::Project
