@@ -37,6 +37,6 @@ else
 fi
 
 
-find root -name '*.txt' -type f | xargs cat | tee result.txt
+find /root -name '*.txt' -type f | xargs cat | tee result.txt
 echo howdy >> result.txt
 
