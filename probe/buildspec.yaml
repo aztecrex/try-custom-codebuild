@@ -13,7 +13,7 @@ phases:
     commands:
       - echo "post build"
 
-# cache:
-#   paths:
-#     - /root/**/*
+cache:
+  paths:
+    - /root/**/*
 

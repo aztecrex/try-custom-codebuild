@@ -164,6 +164,9 @@ Resources:
                 Location: !Sub ${ArtifactStore}/master.zip
                 Type: S3
                 BuildSpec: buildspec.yaml
+            Cache:
+                Type: S3
+                Location: !Sub ${ArtifactStore}/BUILD_CACHE
             Environment:
                 ComputeType: BUILD_GENERAL1_SMALL
                 Image: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${BuilderRepository}
