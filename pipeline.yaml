@@ -156,14 +156,9 @@ Resources:
         Type: AWS::CodeBuild::Project
         Properties:
             Artifacts:
-                Location: !Ref ArtifactStore
-                Name: BuildOutput
-                Type: S3
-                Packaging: ZIP
+                Type: CODEPIPELINE
             Source:
-                Location: !Sub ${ArtifactStore}/master.zip
-                Type: S3
-                BuildSpec: buildspec.yaml
+                Type: CODEPIPELINE
             Cache:
                 Type: S3
                 Location: !Sub ${ArtifactStore}/BUILD_CACHE
