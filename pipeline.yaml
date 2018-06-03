@@ -21,11 +21,11 @@ Resources:
     ArtifactStore:
         Type: AWS::S3::Bucket
 
-#     SourceStore:
-#         Type: AWS::S3::Bucket
-#         Properties:
-#             VersioningConfiguration:
-#                 Status: Enabled
+    SourceStore:
+        Type: AWS::S3::Bucket
+        Properties:
+            VersioningConfiguration:
+                Status: Enabled
 
 #     PipelineRole:
 #         Type: AWS::IAM::Role
@@ -204,8 +204,7 @@ Outputs:
     BuilderRepository:
         Value: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${BuilderRepository}
     SourceStore:
-        # temporary until pipeline in place
-        Value: !Ref ArtifactStore
+        Value: !Ref SourceStore
     ArtifactStore:
         Value: !Ref ArtifactStore
 #     DeployerAccessKey:
