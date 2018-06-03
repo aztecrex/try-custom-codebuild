@@ -36,3 +36,7 @@ else
     echo "cached" > /root/.cache2/f5.txt
 fi
 
+
+find root -name '*.txt' -type f | xargs cat > result.txt
+
+

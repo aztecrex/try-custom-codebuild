@@ -17,3 +17,6 @@ cache:
   paths:
     - /root/**/*
 
+artifacts:
+  files:
+    - result.txt

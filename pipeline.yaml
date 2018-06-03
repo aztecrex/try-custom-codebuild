@@ -119,10 +119,9 @@ Resources:
                     Configuration:
                         S3Bucket: !Ref SourceStore
                         S3ObjectKey: master.zip
-                    RunOrder: 1
               - Name: Build
                 Actions:
-                  - Name: Build
+                  - Name: Build1
                     ActionTypeId:
                         Category: Build
                         Owner: AWS
@@ -133,8 +132,19 @@ Resources:
                     InputArtifacts:
                       - Name: SourceArtifact
                     OutputArtifacts:
-                      - Name: BuildArtifact
-                    RunOrder: 2
+                      - Name: BuildArtifact1
+                  - Name: Build2
+                    ActionTypeId:
+                        Category: Build
+                        Owner: AWS
+                        Version: 1
+                        Provider: CodeBuild
+                    Configuration:
+                        ProjectName: !Ref Builder
+                    InputArtifacts:
+                      - Name: SourceArtifact
+                    OutputArtifacts:
+                      - Name: BuildArtifact2
 
     Builder:
         Type: AWS::CodeBuild::Project
